@@ -1,0 +1,67 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp</title>
+</head>
+<body>
+    
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>ChatApp</title>
+    <style>
+      body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+      #form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
+      #message { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }
+      #message:focus { outline: none; }
+      #form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; cursor: pointer; }
+      #h3 {background-color: aquamarine; font-weight: 600; font-size: larger;}
+      #messages { list-style-type: none; margin: 0; padding: 0; margin: 30hv;}
+      #messages > li { padding: 0.5rem 1rem; }
+      #messages > li:nth-child(odd) { background: #efefef; }
+      #usermessage {background-color: antiquewhite; margin: 30%; font-size: large; font-weight: 300; width: 70vh;}
+    </style>
+  </head>
+  <body>
+    <h3>This Chat App is build by Pravakar Adhikari</h3>
+    <ul id="messages"></ul>
+
+    <form id="form" action="">
+      <input type="text" id="message" autocomplete="on" placeholder="Enter your message" />
+      <button id="sendBTN">Send</button>
+    </form>
+  
+<div id="output"></div>
+    <script src="/socket.io/socket.io.js"></script>
+<script>
+
+  const socket = io();
+  const sendBTN = document.getElementById("sendBTN")
+  const messageInput = document.getElementById("message")
+  const allMessages = document.getElementById("usermessage")
+
+  socket.on("message", (message) => {
+    const  p = document.createElement("p")
+    p.innerText = message
+    allMessages.appendChild(p)
+  })
+
+  sendBTN.addEventListener("click" ,(e)=> {
+   const message = messageInput.value
+   e.preventDefault();
+ 
+   socket.emit("User-Message", message)
+  })
+
+   
+
+</script>
+  </body>
+</html>
